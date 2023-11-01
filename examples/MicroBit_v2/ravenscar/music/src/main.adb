@@ -39,7 +39,22 @@ procedure Main is
    (B3,   400),
    (Rest, 400),
    (A3,   400),
-   (G3,   400));
+    (G3,   400));
+
+
+   const : constant Integer := 2;
+   whole_note : constant Integer := 1600 * const;
+   half_note : constant Integer := 800 * const;
+   quarter_note : constant Integer := 400 * const;
+   eight_note : constant Integer := 200 * const;
+   sixteenth_note : constant Integer := 100 * const;
+   thirtytwo_note : constant Integer := 50 * const;
+
+   dotted_half : constant Integer := 1200 * const;
+   dotted_quarter : constant Integer := 600 * const;
+   dotted_eight : constant Integer := 300 * const;
+   dotted_sixteenth : constant Integer := 150 * const;
+   dotted_thirtytwo : constant Integer := 75 * const;
 
    Music_KnightRider : constant MicroBit.Music.Melody :=
    ((A4, 250), (AS4, 125), (A4, 125),
@@ -101,9 +116,15 @@ procedure Main is
    (A5, 250), (AS5, 125), (A5, 125), (E5, 1500),
    (A4, 250), (AS4, 125), (A4, 125), (E5, 250), (A5, 250), (AS5, 2500), (G5, 250), (A5, 500));
 
+
+   Music_Ride_of_The_Valkyries : constant MicroBit.Music.Melody :=
+     ((E4, dotted_sixteenth), (B3, thirtytwo_note), (E4, sixteenth_note), (G4, dotted_eight), (E4, dotted_eight),
+      (G4, dotted_sixteenth), (E4, thirtytwo_note), (G4, sixteenth_note), (B4, dotted_eight), (G4, dotted_eight),
+      (B4, dotted_sixteenth), (G4, thirtytwo_note), (B4, sixteenth_note), (D5, dotted_eight), (D4, dotted_eight),
+      (G4, dotted_sixteenth), (D4, thirtytwo_note), (G4, sixteenth_note), (B4, half_note));
 --  Play music on the internal speaker at max volume and on repeat
 begin
    loop
-   MicroBit.Music.Play (27, Music_KnightRider);
+   MicroBit.Music.Play (27, Music_Ride_of_The_Valkyries);
    end loop;
 end Main;
