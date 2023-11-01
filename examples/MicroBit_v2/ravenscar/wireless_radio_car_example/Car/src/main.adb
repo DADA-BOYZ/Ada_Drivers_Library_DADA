@@ -38,6 +38,7 @@ with LSM303AGR; use LSM303AGR;
 with HAL; use HAL;
 with ada.Real_Time; use ada.Real_Time;
 with MyMotorController; use MyMotorController;
+with MicroBit.MotorDriver; use MicroBit.MotorDriver;
 procedure Main is
 
    My_Little_Melody2 : constant MicroBit.Music.Melody :=
@@ -103,21 +104,21 @@ begin
                                  LB => (True,  False, 600, normRF),
                                  RF => (True,  False, 500, normRF),
                                  RB => (False, True,  900, normRF)); -- same direction
-
+               MotorDriver.Drive(Left);
             elsif X < -Threshold then
                --right
                 MyMotorController.Drive(LF => (True,  False, 900, normRB),  -- same direction
                                  LB => (False, True,  600, normRB),
                                  RF => (False, True,  500, normRB),
                                  RB => (True,  False, 900, normRB)); -- same direction
-
+               MotorDriver.Drive(Right);
             elsif Y > Threshold then
                --backward
                 MyMotorController.Drive(LF => (True, False, 900, normLF),
                                  LB => (True, False, 500, normLF),
                                  RF => (True, False, 600, normLF),
                                         RB => (True, False, 900, normLF));
-
+                MotorDriver.Drive(Forward);
 
             elsif Y < -Threshold then
                --forward
@@ -125,10 +126,11 @@ begin
                                  LB => (False, True, 500, normLB),
                                  RF => (False, True, 600, normLB),
                                  RB => (False, True, 900, normLB));
-
+               MotorDriver.Drive(Stop);
             else
                --stop
-                MyMotorController.Stop;
+            MyMotorController.Stop;
+            MotorDriver.Drive(Stop);
 
             end if;       
          end loop;
